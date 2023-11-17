@@ -1,0 +1,66 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "d152a82ae527cb1690dc78d2691009f9",
+    "packages": [
+        {
+            "name": "vudev/pagination",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DeveloperVusal/ConstructPagination.git",
+                "reference": "977f852cab139b796d46e68bc36533056a9c5bac"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DeveloperVusal/ConstructPagination/zipball/977f852cab139b796d46e68bc36533056a9c5bac",
+                "reference": "977f852cab139b796d46e68bc36533056a9c5bac",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vudev\\Page\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mamedov Vusal",
+                    "homepage": "https://vusal.website"
+                }
+            ],
+            "description": "This library provides an opportunity to quickly add pagination of pages to your project.",
+            "keywords": [
+                "library",
+                "page",
+                "pagination",
+                "plugin",
+                "yandex"
+            ],
+            "support": {
+                "issues": "https://github.com/DeveloperVusal/ConstructPagination/issues",
+                "source": "https://github.com/DeveloperVusal/ConstructPagination/tree/v1.0.2"
+            },
+            "time": "2021-11-30T20:11:09+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
