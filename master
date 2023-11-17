@@ -1,0 +1,9 @@
+<?php
+define('APP_START', microtime(true));
+
+require __DIR__.'/autoload/register.php';
+
+$console = new Core\Engine\Console($argv);
+$console->handleCommands();
+
+exit('Worked '.(microtime(true) - APP_START).' seconds');
