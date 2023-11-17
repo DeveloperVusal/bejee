@@ -1,7 +1,7 @@
 <?php
 namespace Core\Engine;
 
-class Console {
+final class Console {
     /**
      * Command name
      * 
