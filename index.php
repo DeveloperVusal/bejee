@@ -1,3 +1,7 @@
 <?php
 
-include __DIR__.'/web/todo/index.htm';
+require __DIR__.'./vendor/autoload.php';
+require __DIR__.'./autoload/register.php';
+require __DIR__.'./autoload/helpers.php';
+
+include __DIR__.'./routes/web.php';
