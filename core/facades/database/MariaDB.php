@@ -3,9 +3,8 @@
 namespace Core\Facades\Database;
 
 use Core\Engine\Database as BaseDatabase;
-use Exception;
 
-class MariaDB extends BaseDatabase {
+final class MariaDB extends BaseDatabase {
 
     public static function __constructStatic(): void
 	{
