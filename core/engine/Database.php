@@ -3,8 +3,9 @@
 namespace Core\Engine;
 
 use Core\Interface\Database as InterfaceDatabase;
+use Core\Interface\Facades as InterfaceFacades;
 
-abstract class Database implements InterfaceDatabase {
+abstract class Database implements InterfaceDatabase, InterfaceFacades {
     /**
 	 * PDO instance
 	 * 
