@@ -47,6 +47,8 @@ class TasksService {
 
     public function get(int $offset = 0): mixed
     {
+        if ($offset > 0) $offset--;
+        
         $sql = "SELECT * FROM `tasks` ORDER BY `id` DESC LIMIT {$offset}, 3";
         $stmt = $this->db->query($sql);
 
