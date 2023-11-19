@@ -19,11 +19,17 @@ class TasksController {
     {
         $ts = new TasksService();
 
-        $result = $ts->save();
+        $fields = [
+            'name' => htmlspecialchars($request->field('name')),
+            'email' => $request->field('email'),
+            'text' => htmlspecialchars($request->field('text')),
+        ];
+
+        $result = $ts->save($fields);
 
         return new Response(
             Status::Success, 0,
-            'Successfully', $result
+            'Задача успешно сохранена!', $result
         );
     }
 

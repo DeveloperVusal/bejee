@@ -43,7 +43,7 @@ if (sizeof($matches)) {
             if ($requset->method === 'PUT') {
                 $tc = new TasksController();
                 $response = $tc->save($requset);
-                $response->echo();
+                die($response->create());
             } else {
                 header('Content-Type: application/json');
                 http_response_code(405);

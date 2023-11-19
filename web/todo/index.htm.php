@@ -12,16 +12,17 @@
                     <form onsubmit="onSubmitTaskSave(this); return false;">
                         <div class="mb-3">
                             <label for="formControl-Name" class="form-label">Имя</label>
-                            <input type="text" class="form-control" id="formControl-Name">
+                            <input type="text" name="name" class="form-control" id="formControl-Name">
                         </div>
                         <div class="mb-3">
                             <label for="formControl-Email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="formControl-Email">
+                            <input type="email" name="email" class="form-control" id="formControl-Email">
                         </div>
                         <div class="mb-3">
                             <label for="formControl-Text" class="form-label">Текст</label>
-                            <textarea class="form-control" id="formControl-Text" rows="3"></textarea>
+                            <textarea class="form-control" name="text" id="formControl-Text" rows="3"></textarea>
                         </div>
+                        <div id="liveAlertPlaceholder"></div>
                         <button class="btn btn-primary">Сохранить задачу</button>
                     </form>
                 </div>

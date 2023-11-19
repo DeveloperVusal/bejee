@@ -2,3 +2,7 @@
     border-bottom-left-radius: 4px;
     padding: 2.5px 10px;
 }
+
+.alert-font-small {
+    font-size: 10pt;
+}

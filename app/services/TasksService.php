@@ -17,11 +17,32 @@ class TasksService {
     {
         $this->db = MariaDB::connection();
     }
-
-    public function save(): array
+    
+    public function save(array $fields, ?int $id = 0): array
     {
-        $mock = ['id' => 1];
-        return $mock;
+        $result = [];
+
+        if ($id) {
+            $sql = "UPDATE `tasks` SET `name` = ?, `email` = ?, `text` = ? WHERE id = ?";
+            $sth = $this->db->prepare($sql);
+            $is = $sth->execute([$fields['name'], $fields['email'], $fields['text']]);
+
+            $result = [
+                'action' => 'state',
+                'result' => $is
+            ];
+        } else {
+            $sql = "INSERT INTO `tasks` (`name`, `email`, `text`) VALUES(?, ?, ?)";
+            $sth = $this->db->prepare($sql);
+            $is = $sth->execute([$fields['name'], $fields['email'], $fields['text']]);
+
+            $result = [
+                'action' => 'insert',
+                'result' => (int)$this->db->lastInsertId()
+            ];
+        }
+
+        return $result;
     }
 
     public function get(): array
