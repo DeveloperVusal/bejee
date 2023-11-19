@@ -47,7 +47,7 @@ class TasksService {
 
     public function get(int $offset = 0): mixed
     {
-        $sql = "SELECT * FROM `tasks` LIMIT {$offset}, 3";
+        $sql = "SELECT * FROM `tasks` ORDER BY `id` DESC LIMIT {$offset}, 3";
         $stmt = $this->db->query($sql);
 
         $sql2 = "SELECT COUNT(id) AS count FROM `tasks`";

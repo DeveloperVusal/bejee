@@ -6,31 +6,20 @@ use Core\Http\Request;
 
 use App\Controllers\TasksController;
 
-$requset = new Request();
-$query = $_SERVER['REQUEST_URI'];
+$request = new Request();
+$query = parse_url($_SERVER['REQUEST_URI']);
+$query = $query['path'] ?? '';
 
 switch ($query) {
     case '/':
         $tc = new TasksController();
-        $result = $tc->get($requset);
+        $result = $tc->get($request);
 
         $pagination = new Pagination([
             'count' => $result['count'],
-            'current_page' => 1,
+            'current_page' => (int)$request->field('page'),
             'page_count' => 3,
             'views_page' => 5,
-            'query_key' => 'page_n',
-            
-            // 'temps' => [
-            //     'start_text' => 'На старт',
-            //     'next_text' => 'вперед',
-            //     'classes' => [
-            //         'linkpage' => 'pagination_linkpage',
-            //         'current' => 'pagination_linkpage_current',
-            //         'start' => 'pagination_start',
-            //         'next' => 'pagination_next'
-            //     ],
-            // ]  
         ]);
 
         View::get('todo', 'index.htm.php', [
