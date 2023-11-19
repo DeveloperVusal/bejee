@@ -1,74 +1,97 @@
 <?php
 
+use App\Controllers\TasksController;
 use Core\Http\Request;
+use Core\Http\Response;
+use Core\Http\Status;
 
 $query = $_SERVER['REQUEST_URI'];
 $requset = new Request();
 
-switch ($query) {
-    case '/api/login':
-        if ($requset->method === 'POST') {
+preg_match('/^\/api/m', $query, $matches);
 
-        } else {
-            http_response_code(405);
-            echo json_encode([
-                'type' => 'error',
-                'message' => 'Invalid method, POST must be passed'
-            ]);
-        }
+if (sizeof($matches)) {
+    switch ($query) {
+        case '/api/login':
+            if ($requset->method === 'POST') {
 
-        break;
-    case '/api/logout':
-        if ($requset->method === 'POST') {
+            } else {
+                header('Content-Type: application/json');
+                http_response_code(405);
+                $resp = new Response(
+                    Status::Error, 1,
+                    'Invalid method, POST must be passed'
+                );
+                die($resp->create());
+            }
 
-        } else {
-            http_response_code(405);
-            echo json_encode([
-                'type' => 'error',
-                'message' => 'Invalid method, POST must be passed'
-            ]);
-        }
+            break;
+        case '/api/logout':
+            if ($requset->method === 'POST') {
 
-        break;
-    case '/api/task-save':
-        if ($requset->method === 'PUT') {
+            } else {
+                header('Content-Type: application/json');
+                http_response_code(405);
+                $resp = new Response(
+                    Status::Error, 1,
+                    'Invalid method, POST must be passed'
+                );
+                die($resp->create());
+            }
+            break;
+        case '/api/task-save':
+            if ($requset->method === 'PUT') {
+                $tc = new TasksController();
+                $response = $tc->save($requset);
+                $response->echo();
+            } else {
+                header('Content-Type: application/json');
+                http_response_code(405);
+                $resp = new Response(
+                    Status::Error, 1,
+                    'Invalid method, PUT must be passed'
+                );
+                die($resp->create());
+            }
 
-        } else {
-            http_response_code(405);
-            echo json_encode([
-                'type' => 'error',
-                'message' => 'Invalid method, PUT must be passed'
-            ]);
-        }
+            break;
 
-        break;
+        case '/api/task-get':
+            if ($requset->method === 'GET') {
 
-    case '/api/task-get':
-        if ($requset->method === 'GET') {
+            } else {
+                header('Content-Type: application/json');
+                http_response_code(405);
+                $resp = new Response(
+                    Status::Error, 1,
+                    'Invalid method, GET must be passed'
+                );
+                die($resp->create());
+            }
 
-        } else {
-            http_response_code(405);
-            echo json_encode([
-                'type' => 'error',
-                'message' => 'Invalid method, GET must be passed'
-            ]);
-        }
+            break;
+        case '/api/task-delete':
+            if ($requset->method === 'DELETE') {
 
-        break;
-    case '/api/task-delete':
-        if ($requset->method === 'DELETE') {
+            } else {
+                header('Content-Type: application/json');
+                http_response_code(405);
+                $resp = new Response(
+                    Status::Error, 1,
+                    'Invalid method, DELETE must be passed'
+                );
+                die($resp->create());
+            }
 
-        } else {
-            http_response_code(405);
-            echo json_encode([
-                'type' => 'error',
-                'message' => 'Invalid method, DELETE must be passed'
-            ]);
-        }
-
-        break;
-    default:
-        http_response_code(404);
-        echo "404 Not found";
-        break;
+            break;
+        default:
+            header('Content-Type: application/json');
+            http_response_code(404);
+            $resp = new Response(
+                Status::Error, 1,
+                '404, Not found'
+            );
+            die($resp->create());
+            break;
+    }
 }
