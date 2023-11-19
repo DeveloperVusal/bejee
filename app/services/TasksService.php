@@ -17,7 +17,7 @@ class TasksService {
     {
         $this->db = MariaDB::connection();
     }
-    
+
     public function save(array $fields, ?int $id = 0): array
     {
         $result = [];
@@ -45,14 +45,11 @@ class TasksService {
         return $result;
     }
 
-    public function get(): array
+    public function get(int $offset = 0): mixed
     {
-        $mock = [
-            ['id' => 1, 'name' => 'Vusal', 'email' => 'vusal@gmail.com', 'text' => 'Test 1', 'is_done' => false],
-            ['id' => 2, 'name' => 'Alex', 'email' => 'alex@gmail.com', 'text' => 'Test 2', 'is_done' => true],
-            ['id' => 3, 'name' => 'Ilon', 'email' => 'ilon@gmail.com', 'text' => 'Test 3', 'is_done' => false],
-        ];
+        $sql = "SELECT * FROM `tasks` LIMIT {$offset}, 3";
+        $stmt = $this->db->query($sql);
 
-        return $mock;
+        return $stmt->fetchAll();
     }
 }
