@@ -4,6 +4,7 @@ use Core\Facades\Render\View;
 use Vudev\Page\Pagination;
 use Core\Http\Request;
 
+use App\Controllers\AuthController;
 use App\Controllers\TasksController;
 
 $request = new Request();
@@ -12,6 +13,7 @@ $query = $query['path'] ?? '';
 
 switch ($query) {
     case '/':
+        $ac = new AuthController();
         $tc = new TasksController();
         $result = $tc->get($request);
 
@@ -23,12 +25,21 @@ switch ($query) {
         ]);
 
         View::get('todo', 'index.htm.php', [
+            'is_auth' => $ac->isAuth(),
             'data' => $result['list'],
             'pagination' => $pagination,
         ]);
 
         break;
     
+    case '/auth':
+        $ac = new AuthController();
+
+        View::get('todo', 'auth.htm.php', [
+            'is_auth' => $ac->isAuth(),
+        ]);
+
+        break;
     default:
         http_response_code(404);
         echo "404 Not found";
