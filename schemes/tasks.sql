@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
     `name` VARCHAR(64) NOT NULL,
     `email` VARCHAR(64) NOT NULL,
     `text` TINYTEXT NOT NULL,
+    `is_done` TINYINT(1) DEFAULT 0,
     `updated_at` DATETIME DEFAULT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
     PRIMARY KEY(`id`),
