@@ -19,8 +19,8 @@ final class Response {
     function __construct(
         private Status $status = Status::Success,
         private int $code,
-        private string $message,
-        private array $result,
+        private string $message = '',
+        private array $result = [],
     ) {}
     
     /**
