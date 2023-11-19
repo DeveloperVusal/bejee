@@ -17,7 +17,7 @@ final class Response {
      * @param array $result
      */
     function __construct(
-        private Status $status = Status::Success,
+        private Status $status,
         private int $code,
         private string $message = '',
         private array $result = [],
