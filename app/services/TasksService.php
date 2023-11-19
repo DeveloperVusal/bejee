@@ -30,12 +30,12 @@ class TasksService {
         $result = [];
 
         if ($id) {
-            $sql = "UPDATE `tasks` SET `name` = ?, `email` = ?, `text` = ? WHERE id = ?";
+            $sql = "UPDATE `tasks` SET `text` = ?, `is_done` = ? WHERE id = ?";
             $sth = $this->db->prepare($sql);
-            $is = $sth->execute([$fields['name'], $fields['email'], $fields['text']]);
+            $is = $sth->execute([$fields['text'], $fields['is_done'], $id]);
 
             $result = [
-                'action' => 'state',
+                'action' => 'update',
                 'result' => $is
             ];
         } else {

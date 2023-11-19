@@ -1,5 +1,4 @@
-const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-const alert = (message, type, addmsg) => {
+const alert = (el, message, type, addmsg) => {
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
       `<div class="alert alert-${type} alert-dismissible" role="alert">`,
@@ -9,19 +8,19 @@ const alert = (message, type, addmsg) => {
       '</div>'
     ].join('')
   
-    alertPlaceholder.append(wrapper)
+    el.append(wrapper)
 }
 
 function onSubmitTaskSave(form) {
     var data = {
-        name: form.name.value,
-        email: form.email.value,
+        name: form.name?.value ?? '',
+        email: form.email?.value ?? '',
         text: form.text.value,
     }
 
     if (form.taskid != undefined) {
-        data['id'] = form.taskid.value
-        data['is_done'] = form.is_done.value
+        data['id'] = Number(form.taskid.value)
+        data['is_done'] = form.is_done.checked
     }
 
     if (form.user_id != undefined) {
@@ -36,7 +35,9 @@ function onSubmitTaskSave(form) {
         if (status == 'error') status = 'danger'
 
         if (resp.code === 0) {
-            alert(resp.message, status, 'Обновление страницы через 5 секунд')
+            const alertEl = form.children.liveAlertPlaceholder
+
+            alert(alertEl, resp.message, status, 'Обновление страницы через 5 секунд')
             setTimeout(function() {
                 window.location.reload()
             }, 5000)
