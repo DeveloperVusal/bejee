@@ -48,6 +48,10 @@ function onSubmitTaskSave(form) {
       })
 }
 
+function onSubmitAuth(form) {
+    console.dir(form)
+}
+
 function handleRoute(key, val, opt) {
     const href = new URL(window.location.href)
 
