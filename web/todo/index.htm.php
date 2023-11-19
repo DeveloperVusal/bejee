@@ -50,6 +50,9 @@
                 </div>
             </div>
         <?php endforeach;?>
+        <div class="row">
+            <div class="col"><?php $pagination->pg_print();?></div>
+        </div>
     </div>
 </div>
 

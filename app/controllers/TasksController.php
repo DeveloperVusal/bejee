@@ -39,10 +39,10 @@ class TasksController {
      * @access public
      * @return array
      */
-    public function get(): array
+    public function get(Request $request): array
     {
         $ts = new TasksService();
 
-        return $ts->get();
+        return $ts->get((int)$request->field('page'));
     }
 }

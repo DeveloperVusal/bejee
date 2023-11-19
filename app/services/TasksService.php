@@ -50,6 +50,9 @@ class TasksService {
         $sql = "SELECT * FROM `tasks` LIMIT {$offset}, 3";
         $stmt = $this->db->query($sql);
 
-        return $stmt->fetchAll();
+        $sql2 = "SELECT COUNT(id) AS count FROM `tasks`";
+        $stmt2 = $this->db->query($sql2);
+
+        return ['list' => $stmt->fetchAll(), 'count' => $stmt2->fetchColumn()];
     }
 }
