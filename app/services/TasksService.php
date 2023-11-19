@@ -18,6 +18,13 @@ class TasksService {
         $this->db = MariaDB::connection();
     }
 
+    /**
+     * The method inserting or updating the tasks
+     * 
+     * @param array $fields
+     * @param ?int $id default = 0
+     * @return array
+     */
     public function save(array $fields, ?int $id = 0): array
     {
         $result = [];
@@ -45,10 +52,16 @@ class TasksService {
         return $result;
     }
 
-    public function get(int $offset = 0): mixed
+    /**
+     * The method get the tasks
+     * 
+     * @param int $offset default = 0
+     * @return array
+     */
+    public function get(int $offset = 0): array
     {
         if ($offset > 0) $offset--;
-        
+
         $sql = "SELECT * FROM `tasks` ORDER BY `id` DESC LIMIT {$offset}, 3";
         $stmt = $this->db->query($sql);
 
