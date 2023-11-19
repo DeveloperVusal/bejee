@@ -28,10 +28,11 @@ class UsersService {
      */
     public function findUser(string $login, string $pass): array
     {
-        $hashPass = md5($pass);
-
-        $sql = "SELECT id FROM `users` WHERE `login` = {$login} AND `password` = {$hashPass} LIMIT 1";
-        $stmt = $this->db->query($this->db->quote($sql));
+        $hashPass = $this->db->quote(md5($pass));
+        $login = $this->db->quote($login);
+        
+        $sql = "SELECT `id` FROM `users` WHERE `login` = {$login} AND `password` = {$hashPass}";
+        $stmt = $this->db->query($sql);
 
         return $stmt->fetchAll();
     }
