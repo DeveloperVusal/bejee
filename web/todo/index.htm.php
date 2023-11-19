@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="col-2 text-end p-0">
-            <button class="btn btn-secondary">Вотйи</button>
+            <button class="btn btn-secondary">Войти</button>
         </div>
     </div>
     <div class="row mt-3">
