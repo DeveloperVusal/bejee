@@ -58,11 +58,17 @@ class TasksService {
      * @param int $offset default = 0
      * @return array
      */
-    public function get(int $offset = 0): array
+    public function get(int $offset = 0, ?string $sorts = ''): array
     {
-        if ($offset > 0) $offset--;
+        $orderby = '`id` DESC';
 
-        $sql = "SELECT * FROM `tasks` ORDER BY `id` DESC LIMIT {$offset}, 3";
+        if ($offset > 0) {
+            $offset--;
+            $offset *= 3;
+        }
+        if (strlen($sorts)) $orderby = $sorts;
+
+        $sql = "SELECT * FROM `tasks` ORDER BY {$orderby} LIMIT {$offset}, 3";
         $stmt = $this->db->query($sql);
 
         $sql2 = "SELECT COUNT(id) AS count FROM `tasks`";

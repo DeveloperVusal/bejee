@@ -43,6 +43,19 @@ class TasksController {
     {
         $ts = new TasksService();
 
-        return $ts->get((int)$request->field('page'));
+        $sorts = [
+            'name' => $request->field('sort-name'),
+            'email' => $request->field('sort-email'),
+            'is_done' => $request->field('sort-is_done'),
+        ];
+
+        $sorts = array_map(function($k, $v) {
+            return ($v)?'`'.$k.'` '.strtoupper($v):'';
+        }, array_keys($sorts), array_values($sorts));
+        $sorts = array_filter($sorts, function($v){
+            return !empty($v);
+        });
+
+        return $ts->get((int)$request->field('page'), join(',', $sorts));
     }
 }

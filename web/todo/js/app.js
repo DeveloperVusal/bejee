@@ -46,3 +46,28 @@ function onSubmitTaskSave(form) {
         console.log(error)
       })
 }
+
+function handleRoute(key, val, opt) {
+    const href = new URL(window.location.href)
+
+    if (opt == 'set') href.searchParams.set(key, val)
+    else if (opt == 'del') href.searchParams.delete(key)
+    
+    window.location.href = href.toString()
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const selects = document.querySelectorAll('#selects-sorts select')
+    
+    if (selects && selects.length) {
+        for (let i = 0; i < selects.length; i++) {
+            selects[i].addEventListener('change', function(e) {
+                if (selects[i].value.length) {
+                    handleRoute(selects[i].name, selects[i].value, 'set')
+                } else {
+                    handleRoute(selects[i].name, selects[i].value, 'del')
+                }
+            })
+        }
+    }
+})

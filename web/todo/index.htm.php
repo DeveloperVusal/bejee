@@ -33,6 +33,25 @@
         </div>
     </div>
     <div class="row mt-3">
+        <div class="row mb-3 d-flex justify-content-between pr-0 w-100" id="selects-sorts">
+            <select class="form-select w-auto" name="sort-name">
+                <option value="">Сортировка по Имени</option>
+                <option value="asc" <?php if (isset($_GET['sort-name']) && $_GET['sort-name'] === 'asc'):?>selected<?php endif;?> >По возрастанию</option>
+                <option value="desc" <?php if (isset($_GET['sort-name']) && $_GET['sort-name'] === 'desc'):?>selected<?php endif;?> >По убыванию</option>
+            </select>
+
+            <select class="form-select w-auto" name="sort-email">
+                <option value="">Сортировка по Email</option>
+                <option value="asc" <?php if (isset($_GET['sort-email']) && $_GET['sort-email'] === 'asc'):?>selected<?php endif;?> >По возрастанию</option>
+                <option value="desc" <?php if (isset($_GET['sort-email']) && $_GET['sort-email'] === 'desc'):?>selected<?php endif;?> >По убыванию</option>
+            </select>
+
+            <select class="form-select w-auto" name="sort-is_done">
+                <option value="">Сортировка по Статусу</option>
+                <option value="asc" <?php if (isset($_GET['sort-is_done']) && $_GET['sort-is_done'] === 'asc'):?>selected<?php endif;?> >По возрастанию</option>
+                <option value="desc" <?php if (isset($_GET['sort-is_done']) && $_GET['sort-is_done'] === 'desc'):?>selected<?php endif;?> >По убыванию</option>
+            </select>
+        </div>
         <?php foreach ($data as $row):?>
             <div class="card mb-3 position-relative">
                 <div class="card-body">
