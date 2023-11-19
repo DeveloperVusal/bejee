@@ -10,7 +10,7 @@
             </p>
             <div class="collapse" id="collapseSave">
                 <div class="card card-body">
-                    <form onsubmit="alert(); return false;">
+                    <form onsubmit="onSubmitTaskSave(this); return false;">
                         <div class="mb-3">
                             <label for="formControl-Name" class="form-label">Имя</label>
                             <input type="text" class="form-control" id="formControl-Name">
