@@ -30,12 +30,15 @@ final class Response {
      */
     public function build(): array
     {
-        return [
-            'status' => $this->status,
+        $result = [
+            'status' => $this->status->name,
             'code' => $this->code,
-            'message' => $this->message,
-            'result' => $this->result,
         ];
+        
+        if ($this->message) $result['message'] = $this->message;
+        if ($this->result) $result['result'] = $this->result;
+
+        return $result;
     }
 
     /**
