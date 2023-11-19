@@ -6,10 +6,6 @@ use Core\Facades\Render\View;
 $query = $_SERVER['REQUEST_URI'];
 
 switch ($query) {
-    // case '/db':
-    //     $db = MariaDB::connection();
-    //     break;
-
     case '/':
         // include __DIR__.'./../web/todo/index.htm';
 
@@ -22,6 +18,7 @@ switch ($query) {
         break;
     
     default:
-        echo '404';
+        http_response_code(404);
+        echo "404 Not found";
         break;
 }
