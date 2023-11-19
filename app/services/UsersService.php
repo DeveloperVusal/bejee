@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Core\Facades\Database\MariaDB;
 
-class TasksService {
+class UsersService {
 
     private \PDO $db; 
 
