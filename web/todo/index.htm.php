@@ -30,7 +30,15 @@
             </div>
         </div>
         <div class="col-2 text-end p-0">
-            <button class="btn btn-secondary">Войти</button>
+            <?php if ($is_auth):?>
+                <a href="/auth">
+                    <button class="btn btn-secondary">Войти</button>
+                </a>
+            <?php else:?>
+                <a href="/api/logout">
+                    <button class="btn btn-secondary">Войти</button>
+                </a>
+            <?php endif;?>
         </div>
     </div>
     <div class="row mt-3">
