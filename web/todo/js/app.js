@@ -34,10 +34,10 @@ function onSubmitTaskSave(form) {
 
         if (status == 'error') status = 'danger'
 
-        if (resp.code === 0) {
-            const alertEl = form.children.liveAlertPlaceholder
+        const alertEl = form.children.liveAlertPlaceholder
+        malert(alertEl, resp.message, status, 'Обновление страницы через 5 секунд')
 
-            malert(alertEl, resp.message, status, 'Обновление страницы через 5 секунд')
+        if (resp.code === 0) {
             setTimeout(function() {
                 window.location.reload()
             }, 5000)
