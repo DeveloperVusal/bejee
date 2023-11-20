@@ -26,15 +26,16 @@ class TasksController {
             'is_done' => (int)$request->field('is_done'),
         ];
 
-        $pattern = '/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,10}\.)?[a-z]{2,10}$/i';
+        if (!(int)$request->field('id')) {
+            $pattern = '/^([a-z0-9_\.-])+@[a-z0-9-]+\.([a-z]{2,10}\.)?[a-z]{2,10}$/i';
 
-        if (!preg_match($pattern, $fields['email'])) {
-            return new Response(
-                Status::Error, 3,
-                'E-mail введен некорректно'
-            );
+            if (!preg_match($pattern, $fields['email'])) {
+                return new Response(
+                    Status::Error, 3,
+                    'E-mail введен некорректно'
+                );
+            }
         }
-
 
         $result = $ts->save($fields, (int)$request->field('id'));
 
