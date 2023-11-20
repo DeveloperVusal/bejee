@@ -12,7 +12,7 @@ final class View {
      */
     public static function get(string $template, string $filepath, array $vars = []): void
     {
-        $tempDir = getcwd().'/web/'.trim($template, ' /\\').'/'.trim($filepath, ' /\\');
+        $tempDir = getcwd().'/../web/'.trim($template, ' /\\').'/'.trim($filepath, ' /\\');
         
         if (sizeof($vars)) extract($vars);
 

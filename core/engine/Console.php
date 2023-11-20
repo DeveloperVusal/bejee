@@ -63,7 +63,7 @@ final class Console {
     {
         switch ($action) {
             case 'serve':
-                exec('php -S localhost:'.((isset($options[0]) && $options[0]) ? $options[0] : '5000'));
+                exec('php -S localhost:'.((isset($options[0]) && $options[0]) ? $options[0] : '5000').' -t public/');
 
                 break;
             
