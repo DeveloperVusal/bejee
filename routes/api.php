@@ -17,7 +17,9 @@ if (sizeof($matches)) {
             if ($requset->method === 'POST') {
                 $ac = new AuthController;
                 $isAuth = $ac->login($requset);
-                die($isAuth->create());
+
+                echo $isAuth->create();
+                exit;
             } else {
                 header('Content-Type: application/json');
                 http_response_code(405);
@@ -25,7 +27,8 @@ if (sizeof($matches)) {
                     Status::Error, 1,
                     'Invalid method, POST must be passed'
                 );
-                die($resp->create());
+                echo $resp->create();
+                exit;
             }
 
             break;
@@ -36,7 +39,7 @@ if (sizeof($matches)) {
 
                 header('Location: /');
 
-                die;
+                exit;
             } else {
                 header('Content-Type: application/json');
                 http_response_code(405);
@@ -44,7 +47,8 @@ if (sizeof($matches)) {
                     Status::Error, 1,
                     'Invalid method, POST must be passed'
                 );
-                die($resp->create());
+                echo $resp->create();
+                exit;
             }
             break;
         case '/api/task-save':
@@ -52,7 +56,9 @@ if (sizeof($matches)) {
                 if (AuthController::isAuth()) {
                     $tc = new TasksController();
                     $response = $tc->save($requset);
-                    die($response->create());
+
+                    echo $response->create();
+                    exit;
                 } else {
                     http_response_code(401);
                     die;
@@ -64,25 +70,12 @@ if (sizeof($matches)) {
                     Status::Error, 1,
                     'Invalid method, PUT must be passed'
                 );
-                die($resp->create());
+                echo $resp->create();
+                exit;
             }
 
             break;
 
-        case '/api/task-get':
-            if ($requset->method === 'GET') {
-
-            } else {
-                header('Content-Type: application/json');
-                http_response_code(405);
-                $resp = new Response(
-                    Status::Error, 1,
-                    'Invalid method, GET must be passed'
-                );
-                die($resp->create());
-            }
-
-            break;
         default:
             header('Content-Type: application/json');
             http_response_code(404);
@@ -90,7 +83,8 @@ if (sizeof($matches)) {
                 Status::Error, 1,
                 '404, Not found'
             );
-            die($resp->create());
+            echo $resp->create();
+            exit;
             break;
     }
 }
