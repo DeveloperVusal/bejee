@@ -45,6 +45,11 @@ function onSubmitTaskSave(form) {
       })
       .catch(function (error) {
         console.log(error)
+        if (error?.response?.status == 401) {
+            const conf = confirm('Необходимо авторизоваться')
+
+            if (conf) window.location.href = '/auth'
+        }
       })
 }
 
