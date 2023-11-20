@@ -12,10 +12,11 @@ class AuthController {
     /**
      * The method checking authentification of user
      * 
+     * @static
      * @access public
      * @return bool
      */
-    public function isAuth(): bool
+    public static function isAuth(): bool
     {
         return isset($_SESSION['user_id']) && (int)$_SESSION['user_id'] > 0;
     }

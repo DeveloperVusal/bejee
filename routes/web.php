@@ -33,15 +33,11 @@ switch ($query) {
         break;
     
     case '/auth':
-        $ac = new AuthController();
-
-        if ($ac->isAuth()) {
+        if (AuthController::isAuth()) {
             header('Location: /');
         }
 
-        View::get('todo', 'auth.htm.php', [
-            'is_auth' => $ac->isAuth(),
-        ]);
+        View::get('todo', 'auth.htm.php');
 
         break;
     default:

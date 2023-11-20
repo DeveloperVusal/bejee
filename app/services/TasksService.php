@@ -32,7 +32,7 @@ class TasksService {
 
         if ($id) {
             $task = $this->getById($id);
-            $user_id = null;
+            $user_id = $task['save_user_id'];
 
             if ($fields['text'] !== $task['text']) {
                 $user_id = AuthController::getUserId();

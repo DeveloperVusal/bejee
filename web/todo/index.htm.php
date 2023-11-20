@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-2 text-end p-0">
-            <?php if ($auth->isAuth()):?>
+            <?php if ($auth::isAuth()):?>
                 <a href="/api/logout">
                     <button class="btn btn-secondary">Выйти</button>
                 </a>
@@ -67,7 +67,7 @@
                     <h5 class="card-title">Задача #<?=sprintf("%04d", $row['id']);?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?=$row['name'];?> (<?=$row['email'];?>)</h6>
                     <p class="card-text"><?=$row['text'];?></p>
-                    <?php if ($auth->isAuth()):?>
+                    <?php if ($auth::isAuth()):?>
                         <a href="#" class="card-link" data-bs-toggle="collapse" data-bs-target="#collapseSave-<?=$row['id'];?>" aria-expanded="false" aria-controls="collapseSave-<?=$row['id'];?>">Редактировать</a>
                     <?php endif;?>
                     
@@ -79,7 +79,7 @@
                         <div class="position-absolute <?=($row['save_user_id'])?'my-top-30':'top-0';?> end-0 bg-success text-white card-status">Выполнено</div>
                     <?php endif;?>
                 </div>
-                <?php if ($auth->isAuth()):?>
+                <?php if ($auth::isAuth()):?>
                     <div class="collapse mb-3" id="collapseSave-<?=$row['id'];?>">
                         <div class="card card-body card-body-bg">
                             <form onsubmit="onSubmitTaskSave(this); return false;">

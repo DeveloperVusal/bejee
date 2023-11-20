@@ -49,9 +49,14 @@ if (sizeof($matches)) {
             break;
         case '/api/task-save':
             if ($requset->method === 'PUT') {
-                $tc = new TasksController();
-                $response = $tc->save($requset);
-                die($response->create());
+                if (AuthController::isAuth()) {
+                    $tc = new TasksController();
+                    $response = $tc->save($requset);
+                    die($response->create());
+                } else {
+                    http_response_code(401);
+                    die;
+                }
             } else {
                 header('Content-Type: application/json');
                 http_response_code(405);
@@ -73,20 +78,6 @@ if (sizeof($matches)) {
                 $resp = new Response(
                     Status::Error, 1,
                     'Invalid method, GET must be passed'
-                );
-                die($resp->create());
-            }
-
-            break;
-        case '/api/task-delete':
-            if ($requset->method === 'DELETE') {
-
-            } else {
-                header('Content-Type: application/json');
-                http_response_code(405);
-                $resp = new Response(
-                    Status::Error, 1,
-                    'Invalid method, DELETE must be passed'
                 );
                 die($resp->create());
             }
