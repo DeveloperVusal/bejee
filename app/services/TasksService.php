@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Controllers\AuthController;
 use Core\Facades\Database\MariaDB;
 
 class TasksService {
@@ -30,9 +31,16 @@ class TasksService {
         $result = [];
 
         if ($id) {
-            $sql = "UPDATE `tasks` SET `text` = ?, `is_done` = ? WHERE id = ?";
+            $task = $this->getById($id);
+            $user_id = null;
+
+            if ($fields['text'] !== $task['text']) {
+                $user_id = AuthController::getUserId();
+            }
+
+            $sql = "UPDATE `tasks` SET `text` = ?, `is_done` = ?, `save_user_id` = ? WHERE id = ?";
             $sth = $this->db->prepare($sql);
-            $is = $sth->execute([$fields['text'], $fields['is_done'], $id]);
+            $is = $sth->execute([$fields['text'], $fields['is_done'], $user_id, $id]);
 
             $result = [
                 'action' => 'update',
@@ -76,5 +84,20 @@ class TasksService {
         $stmt2 = $this->db->query($sql2);
 
         return ['list' => $stmt->fetchAll(), 'count' => $stmt2->fetchColumn()];
+    }
+
+    /**
+     * The method gets task data by id
+     * 
+     * @access public
+     * @param int $id
+     * @return array
+     */
+    public function getById(int $id): array
+    {
+        $sql = "SELECT * FROM `tasks` WHERE id = {$id}";
+        $stmt = $this->db->query($sql);
+
+        return $stmt->fetchAll()[0];
     }
 }

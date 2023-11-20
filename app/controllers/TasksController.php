@@ -23,7 +23,7 @@ class TasksController {
             'name' => htmlspecialchars($request->field('name')),
             'email' => $request->field('email'),
             'text' => htmlspecialchars($request->field('text')),
-            'is_done' => (bool)$request->field('is_done'),
+            'is_done' => (int)$request->field('is_done'),
         ];
 
         $result = $ts->save($fields, (int)$request->field('id'));

@@ -70,11 +70,13 @@
                     <?php if ($auth->isAuth()):?>
                         <a href="#" class="card-link" data-bs-toggle="collapse" data-bs-target="#collapseSave-<?=$row['id'];?>" aria-expanded="false" aria-controls="collapseSave-<?=$row['id'];?>">Редактировать</a>
                     <?php endif;?>
+                    
+                    <?php if ($row['save_user_id']):?>
+                        <div class="position-absolute top-0 end-0 bg-info text-white card-status">Отредактировано администратором</div>
+                    <?php endif;?>
 
                     <?php if ($row['is_done']):?>
-                        <div class="position-absolute top-0 end-0 bg-success text-white card-status">
-                            Done
-                        </div>
+                        <div class="position-absolute <?=($row['save_user_id'])?'my-top-30':'top-0';?> end-0 bg-success text-white card-status">Выполнено</div>
                     <?php endif;?>
                 </div>
                 <?php if ($auth->isAuth()):?>
