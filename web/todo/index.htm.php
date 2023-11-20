@@ -67,7 +67,9 @@
                     <h5 class="card-title">Задача #<?=sprintf("%04d", $row['id']);?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?=$row['name'];?> (<?=$row['email'];?>)</h6>
                     <p class="card-text"><?=$row['text'];?></p>
-                    <a href="#" class="card-link" data-bs-toggle="collapse" data-bs-target="#collapseSave-<?=$row['id'];?>" aria-expanded="false" aria-controls="collapseSave-<?=$row['id'];?>">Редактировать</a>
+                    <?php if ($is_auth):?>
+                        <a href="#" class="card-link" data-bs-toggle="collapse" data-bs-target="#collapseSave-<?=$row['id'];?>" aria-expanded="false" aria-controls="collapseSave-<?=$row['id'];?>">Редактировать</a>
+                    <?php endif;?>
 
                     <?php if ($row['is_done']):?>
                         <div class="position-absolute top-0 end-0 bg-success text-white card-status">
@@ -75,24 +77,25 @@
                         </div>
                     <?php endif;?>
                 </div>
-
-                <div class="collapse mb-3" id="collapseSave-<?=$row['id'];?>">
-                    <div class="card card-body card-body-bg">
-                        <form onsubmit="onSubmitTaskSave(this); return false;">
-                        <input type="hidden" name="taskid" value="<?=$row['id'];?>">
-                            <div class="mb-3">
-                                <label for="formControl-Text" class="form-label">Текст</label>
-                                <textarea class="form-control" name="text" id="formControl-Text" rows="3"><?=$row['text'];?></textarea>
-                            </div>
-                            <div class="form-check form-switch mb-3">
-                                <input class="form-check-input" type="checkbox" role="switch" id="formControl-IsDone"<?php if ($row['is_done']):?>checked<?php endif;?> name="is_done">
-                                <label class="form-check-label" for="formControl-IsDone">Выполнено</label>
-                            </div>
-                            <div id="liveAlertPlaceholder"></div>
-                            <button class="btn btn-primary">Сохранить задачу</button>
-                        </form>
+                <?php if ($is_auth):?>
+                    <div class="collapse mb-3" id="collapseSave-<?=$row['id'];?>">
+                        <div class="card card-body card-body-bg">
+                            <form onsubmit="onSubmitTaskSave(this); return false;">
+                            <input type="hidden" name="taskid" value="<?=$row['id'];?>">
+                                <div class="mb-3">
+                                    <label for="formControl-Text" class="form-label">Текст</label>
+                                    <textarea class="form-control" name="text" id="formControl-Text" rows="3"><?=$row['text'];?></textarea>
+                                </div>
+                                <div class="form-check form-switch mb-3">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="formControl-IsDone"<?php if ($row['is_done']):?>checked<?php endif;?> name="is_done">
+                                    <label class="form-check-label" for="formControl-IsDone">Выполнено</label>
+                                </div>
+                                <div id="liveAlertPlaceholder"></div>
+                                <button class="btn btn-primary">Сохранить задачу</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                <?php endif;?>
             </div>
         <?php endforeach;?>
         <div class="row">

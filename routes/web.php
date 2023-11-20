@@ -35,6 +35,10 @@ switch ($query) {
     case '/auth':
         $ac = new AuthController();
 
+        if ($ac->isAuth()) {
+            header('Location: /');
+        }
+
         View::get('todo', 'auth.htm.php', [
             'is_auth' => $ac->isAuth(),
         ]);

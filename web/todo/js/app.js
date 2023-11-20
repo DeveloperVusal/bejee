@@ -1,4 +1,4 @@
-const alert = (el, message, type, addmsg) => {
+const malert = (el, message, type, addmsg) => {
     const wrapper = document.createElement('div')
     wrapper.innerHTML = [
       `<div class="alert alert-${type} alert-dismissible" role="alert">`,
@@ -37,7 +37,7 @@ function onSubmitTaskSave(form) {
         if (resp.code === 0) {
             const alertEl = form.children.liveAlertPlaceholder
 
-            alert(alertEl, resp.message, status, 'Обновление страницы через 5 секунд')
+            malert(alertEl, resp.message, status, 'Обновление страницы через 5 секунд')
             setTimeout(function() {
                 window.location.reload()
             }, 5000)
@@ -49,7 +49,22 @@ function onSubmitTaskSave(form) {
 }
 
 function onSubmitAuth(form) {
-    console.dir(form)
+    axios.post('/api/login', {
+        login: form.login.value,
+        password: form.password.value,
+    })
+      .then(function (response) {
+        const resp = response.data
+
+        if (resp.code === 0) {
+            window.location.href = '/'
+        } else {
+            alert(resp.message)
+        }
+      })
+      .catch(function (error) {
+        console.log(error)
+      })
 }
 
 function handleRoute(key, val, opt) {

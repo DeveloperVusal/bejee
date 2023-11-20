@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\AuthController;
 use App\Controllers\TasksController;
 use Core\Http\Request;
 use Core\Http\Response;
@@ -14,7 +15,9 @@ if (sizeof($matches)) {
     switch ($query) {
         case '/api/login':
             if ($requset->method === 'POST') {
-
+                $ac = new AuthController;
+                $isAuth = $ac->login($requset);
+                die($isAuth->create());
             } else {
                 header('Content-Type: application/json');
                 http_response_code(405);
@@ -27,8 +30,13 @@ if (sizeof($matches)) {
 
             break;
         case '/api/logout':
-            if ($requset->method === 'POST') {
+            if ($requset->method === 'GET') {
+                $ac = new AuthController;
+                $isLogout = $ac->logout();
 
+                header('Location: /');
+
+                die;
             } else {
                 header('Content-Type: application/json');
                 http_response_code(405);
