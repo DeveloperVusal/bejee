@@ -1,5 +1,6 @@
 const malert = (el, message, type, addmsg) => {
     const wrapper = document.createElement('div')
+    wrapper.id = Date.now()
     wrapper.innerHTML = [
       `<div class="alert alert-${type} alert-dismissible" role="alert">`,
       `   <div>${message}</div>`,
@@ -7,8 +8,10 @@ const malert = (el, message, type, addmsg) => {
       `${(addmsg)?'   <hr><p class="alert-font-small mb-0">'+addmsg+'</p>':''}`,
       '</div>'
     ].join('')
-  
+    
     el.append(wrapper)
+
+    if (el.childElementCount > 1) el.firstChild.remove()
 }
 
 function onSubmitTaskSave(form) {
@@ -35,9 +38,14 @@ function onSubmitTaskSave(form) {
         if (status == 'error') status = 'danger'
 
         const alertEl = form.children.liveAlertPlaceholder
-        malert(alertEl, resp.message, status, 'Обновление страницы через 5 секунд')
+        malert(alertEl, resp.message, status, (status == 'success')?'Обновление страницы через 5 секунд':'')
 
         if (resp.code === 0) {
+            if (form.taskid == undefined) {
+                form.name.value = ''
+                form.email.value = ''
+                form.text.value = ''
+            }
             setTimeout(function() {
                 window.location.reload()
             }, 5000)
