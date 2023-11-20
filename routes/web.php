@@ -25,7 +25,7 @@ switch ($query) {
         ]);
 
         View::get('todo', 'index.htm.php', [
-            'is_auth' => $ac->isAuth(),
+            'auth' => $ac,
             'data' => $result['list'],
             'pagination' => $pagination,
         ]);

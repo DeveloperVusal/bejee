@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-2 text-end p-0">
-            <?php if ($is_auth):?>
+            <?php if ($auth->isAuth()):?>
                 <a href="/api/logout">
                     <button class="btn btn-secondary">Выйти</button>
                 </a>
@@ -67,7 +67,7 @@
                     <h5 class="card-title">Задача #<?=sprintf("%04d", $row['id']);?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?=$row['name'];?> (<?=$row['email'];?>)</h6>
                     <p class="card-text"><?=$row['text'];?></p>
-                    <?php if ($is_auth):?>
+                    <?php if ($auth->isAuth()):?>
                         <a href="#" class="card-link" data-bs-toggle="collapse" data-bs-target="#collapseSave-<?=$row['id'];?>" aria-expanded="false" aria-controls="collapseSave-<?=$row['id'];?>">Редактировать</a>
                     <?php endif;?>
 
@@ -77,11 +77,12 @@
                         </div>
                     <?php endif;?>
                 </div>
-                <?php if ($is_auth):?>
+                <?php if ($auth->isAuth()):?>
                     <div class="collapse mb-3" id="collapseSave-<?=$row['id'];?>">
                         <div class="card card-body card-body-bg">
                             <form onsubmit="onSubmitTaskSave(this); return false;">
-                            <input type="hidden" name="taskid" value="<?=$row['id'];?>">
+                                <input type="hidden" name="taskid" value="<?=$row['id'];?>">
+                                <input type="hidden" name="user_id" value="<?=$auth->getUserId();?>">
                                 <div class="mb-3">
                                     <label for="formControl-Text" class="form-label">Текст</label>
                                     <textarea class="form-control" name="text" id="formControl-Text" rows="3"><?=$row['text'];?></textarea>
