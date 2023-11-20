@@ -82,7 +82,7 @@
                         <div class="card card-body card-body-bg">
                             <form onsubmit="onSubmitTaskSave(this); return false;">
                                 <input type="hidden" name="taskid" value="<?=$row['id'];?>">
-                                <input type="hidden" name="user_id" value="<?=$auth->getUserId();?>">
+                                <input type="hidden" name="user_id" value="<?=$auth::getUserId();?>">
                                 <div class="mb-3">
                                     <label for="formControl-Text" class="form-label">Текст</label>
                                     <textarea class="form-control" name="text" id="formControl-Text" rows="3"><?=$row['text'];?></textarea>

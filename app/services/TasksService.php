@@ -68,7 +68,8 @@ class TasksService {
         }
         if (strlen($sorts)) $orderby = $sorts;
 
-        $sql = "SELECT * FROM `tasks` ORDER BY {$orderby} LIMIT {$offset}, 3";
+        $selects = '`id`, `name`, `email`, `text`, `is_done`, `save_user_id`';
+        $sql = "SELECT {$selects} FROM `tasks` ORDER BY {$orderby} LIMIT {$offset}, 3";
         $stmt = $this->db->query($sql);
 
         $sql2 = "SELECT COUNT(id) AS count FROM `tasks`";

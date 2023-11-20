@@ -68,8 +68,8 @@ class AuthController {
 
         return empty($_SESSION['user_id']);
     }
-
-    public function getUserId(): int
+    
+    public static function getUserId(): int
     {
         return (int)$_SESSION['user_id'];
     }
