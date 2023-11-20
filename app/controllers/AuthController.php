@@ -69,6 +69,13 @@ class AuthController {
         return empty($_SESSION['user_id']);
     }
     
+    /**
+     * The method get the user id while authentication
+     * 
+     * @static
+     * @access public
+     * @return int
+     */
     public static function getUserId(): int
     {
         return (int)$_SESSION['user_id'];
