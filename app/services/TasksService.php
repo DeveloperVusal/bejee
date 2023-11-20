@@ -61,6 +61,30 @@ class TasksService {
     }
 
     /**
+     * The method deleting the tasks
+     * 
+     * @param int $id
+     * @return array
+     */
+    public function delete(int $id): array
+    {
+        $result = [];
+
+        if ($id) {
+            $sql = "DELETE FROM `tasks` WHERE id = ?";
+            $sth = $this->db->prepare($sql);
+            $is = $sth->execute([$id]);
+
+            $result = [
+                'action' => 'delete',
+                'result' => $is
+            ];
+        }
+
+        return $result;
+    }
+
+    /**
      * The method get the tasks
      * 
      * @param int $offset default = 0

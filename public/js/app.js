@@ -61,6 +61,33 @@ function onSubmitTaskSave(form) {
       })
 }
 
+function onClickRemove(id) {
+    const conf = confirm('Вы действительно хотите удалить задачу?')
+
+    if (conf) {
+        axios.post('/api/task-delete', {
+            id: id
+        })
+        .then(function (response) {
+            const resp = response.data
+
+            if (resp.code === 0) {
+                window.location.reload()
+            } else {
+                alert(resp.message)
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+            if (error?.response?.status == 401) {
+                const conf = confirm('Необходимо авторизоваться')
+
+                if (conf) window.location.href = '/auth'
+            }
+        })
+    }
+}
+
 function onSubmitAuth(form) {
     axios.post('/api/login', {
         login: form.login.value,

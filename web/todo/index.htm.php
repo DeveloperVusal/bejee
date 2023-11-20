@@ -61,14 +61,23 @@
                 <option value="desc" <?php if (isset($_GET['sort-is_done']) && $_GET['sort-is_done'] === 'desc'):?>selected<?php endif;?> >По убыванию</option>
             </select>
         </div>
+
+        <?php if (!count($data)):?>
+            <div class="alert alert-info" role="alert">
+                Задачи еще не добавлены!
+            </div>
+        <?php endif;?>
+
         <?php foreach ($data as $row):?>
             <div class="card mb-3 position-relative">
                 <div class="card-body">
                     <h5 class="card-title">Задача #<?=sprintf("%04d", $row['id']);?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?=$row['name'];?> (<?=$row['email'];?>)</h6>
                     <p class="card-text"><?=$row['text'];?></p>
+
                     <?php if ($auth::isAuth()):?>
                         <a href="#" class="card-link" data-bs-toggle="collapse" data-bs-target="#collapseSave-<?=$row['id'];?>" aria-expanded="false" aria-controls="collapseSave-<?=$row['id'];?>">Редактировать</a>
+                        <button type="button" onclick="onClickRemove(<?=$row['id'];?>)" class="btn btn-link text-danger">Удалить</button>
                     <?php endif;?>
                     
                     <?php if ($row['save_user_id']):?>

@@ -75,7 +75,30 @@ if (sizeof($matches)) {
             }
 
             break;
+        case '/api/task-delete':
+            if ($requset->method === 'POST') {
+                if (AuthController::isAuth()) {
+                    $tc = new TasksController();
+                    $response = $tc->delete($requset);
 
+                    echo $response->create();
+                    exit;
+                } else {
+                    http_response_code(401);
+                    die;
+                }
+            } else {
+                header('Content-Type: application/json');
+                http_response_code(405);
+                $resp = new Response(
+                    Status::Error, 1,
+                    'Invalid method, PUT must be passed'
+                );
+                echo $resp->create();
+                exit;
+            }
+
+            break;
         default:
             header('Content-Type: application/json');
             http_response_code(404);

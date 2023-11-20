@@ -46,6 +46,31 @@ class TasksController {
     }
 
     /**
+     * The method for delete tasks
+     * 
+     * @param Request $request
+     * @access public
+     * @return Response
+     */
+    public function delete(Request $request): Response
+    {
+        if ((int)$request->field('id')) {
+            $ts = new TasksService();
+            $result = $ts->delete((int)$request->field('id'));
+
+            return new Response(
+                Status::Success, 0,
+                'Задача успешно удалена!', $result
+            );
+        } else {
+            return new Response(
+                Status::Error, 2,
+                'Id не передан!'
+            );
+        }
+    }
+
+    /**
      * The method for get tasks
      * 
      * @access public
